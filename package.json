@@ -1,0 +1,17 @@
+{
+  "name": "hopecore",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file=.env index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.5.2",
+    "pug": "^3.0.3"
+  }
+}
