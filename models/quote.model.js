@@ -5,19 +5,23 @@ const QuoteSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    upvotes: {
-        type: Number,
-        require: true,
-        default: 0
-    },
     info: {
+        approved: {
+            type: Boolean,
+            default: false
+        },
+        origin: {
+            type: String,
+            default: "unknown"
+        },
         postedBy: {
             type: String,
             default: "marco"
         },
-        postDate: {
-            type: Date,
-            default: new Date()
+        upvotes: {
+            type: Number,
+            require: true,
+            default: 0
         }
     }
 })

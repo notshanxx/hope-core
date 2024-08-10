@@ -1,9 +1,13 @@
 import quoteModel from "../models/quote.model.js";
 
-
+// create 
 export const createQuote = async (req, res) => {
     await quoteModel.create({
-        quote: "In the darkest days, Hope is what you give to your self"
+        quote: req.body.quote,
+        info:{
+            origin: req.body.origin
+        }
     })
-    res.send(await quoteModel.find())
+    
+    res.render('dashboard', {submitted: true})
 }

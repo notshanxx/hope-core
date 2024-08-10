@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Dashboard
+    body 
+
+    include navigation.pug
+
+    h1 DASHBOARD
+    
+    form(action="/dashboard", method="post") 
+        div 
+            label(for="quote") Quote
+            input#quote(type="text", name="quote", required)
+        div
+            label(for="origin") Origin
+            input#origin(type="text", name="origin")
+
+        button(type="submit") SUBMIT
+    
+    if submitted 
+        p Added Successfully

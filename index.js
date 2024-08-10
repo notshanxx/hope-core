@@ -1,18 +1,32 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import { connectDB } from "./middleware/connectDB.js";
 // import routes
 import homeRouter from "./routes/home.route.js";
 import apiRouter from "./routes/api.route.js";
+import dashboardRouter from "./routes/dashboard.route.js"
+
 
 const PORT = process.env.PORT
 const app = express()
-
+//to be able get req.body
+app.use(express.urlencoded({extended: false}))
 app.set('view engine', 'pug')
 app.set('views', './views')
 
 // routes
 app.use('/', homeRouter)
 app.use('/', apiRouter)
+app.use('/', dashboardRouter)
+// app.use(express.json())
+
+
+// login and sign up 
+app.get('/login', (req, res) =>{
+    res.render('login')
+})
+app.get('/signup', (req,res) =>{
+    res.render('signup')
+})
 
 
 app.listen(PORT, ()=>{
