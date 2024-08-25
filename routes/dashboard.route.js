@@ -1,12 +1,13 @@
 import express from "express";
 import { createQuote } from "../controllers/api.controller.js";
+import { authenticate } from "../middleware/authenticateUser.js";
 const router = express.Router()
 
 
-router.get('/dashboard', (req, res) =>{
+router.get('/dashboard' , authenticate, (req, res) =>{
     res.render('dashboard')
 })
 
-router.post('/dashboard', createQuote)
+router.post('/dashboard', authenticate, createQuote)
 
 export default router

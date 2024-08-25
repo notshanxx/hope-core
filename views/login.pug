@@ -7,12 +7,13 @@ html(lang="en")
     body 
 
     include navigation.pug
-    h1 login 
-    form(action='#' method='method')
-        .form-group
-            label(for='email') Email
-            input.form-control(type='email', name='email' placeholder='Email' autofocus=true)
-        .form-group
-            label(for='password') Password
-            input.form-control(type='password', name='{:password}')
-        button.btn.btn-primary(type='submit') Log-in
+
+    button 
+        a(href=url)
+            svg(xmlns='http://www.w3.org/2000/svg' fill='#000000' viewbox='0 0 256 256')
+                path(d='M224,128a96,96,0,1,1-21.95-61.09,8,8,0,1,1-12.33,10.18A80,80,0,1,0,207.6,136H128a8,8,0,0,1,0-16h88A8,8,0,0,1,224,128Z')
+            div Login with Google
+            
+        
+        
+    
