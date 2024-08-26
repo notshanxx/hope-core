@@ -20,5 +20,5 @@ export const createQuote = async (req, res) => {
         }
     })
     
-    res.render('dashboard', {submitted: true})
+    res.render('dashboard', {submitted: true, name})
 }
