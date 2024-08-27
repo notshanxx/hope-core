@@ -5,7 +5,7 @@ const GOOGLE_OAUTH_URL = process.env.GOOGLE_OAUTH_URL;
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 
-const GOOGLE_CALLBACK_URL = "http%3A//localhost:8000/google/callback";
+const GOOGLE_CALLBACK_URL = "http%3A//hopecore.onrender.com/google/callback";
 
 const GOOGLE_OAUTH_SCOPES = [
   "https%3A//www.googleapis.com/auth/userinfo.email",
