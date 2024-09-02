@@ -1,0 +1,35 @@
+doctype
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title Admin
+    body
+    include navigation.pug
+
+    h1 Admin Dashboard
+
+    
+    button Approve
+    button Reject
+    
+    h2 Quotes
+    div 
+        each val in quotes
+            div
+                input(type="checkbox" data-id=val._id) 
+                span= val.quote
+    h2 Approved Quotes
+    div 
+        each val in quotesApproved
+            div
+                input(type="checkbox" data-id=val._id) 
+                span= val.quote
+    h2 Not Approved Quotes
+    div 
+        each val in quotesNotApproved
+            div
+                input(type="checkbox" data-id=val._id) 
+                span= val.quote
+
+
+        
