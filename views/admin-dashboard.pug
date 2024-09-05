@@ -1,35 +1,83 @@
-doctype
+doctype html
 html(lang='en')
-    head
-        meta(charset='utf-8')
-        title Admin
-    body
+  head
+    meta(charset='utf-8')
+    title Admin
+  body
     include navigation.pug
 
     h1 Admin Dashboard
 
     
-    button Approve
-    button Reject
+
+    //- section
+    //-   h2 Quotes
+    //-   form(action="/admin", method="post", id="checklistForm")
+    //-     ul
+    //-       each val in quotes
+    //-         li
+    //-           input(type="checkbox" data-id=val._id)
+    //-           span= val.quote
+    button(type="button", onclick="toggleSection('approved')") Approve
+    button(type="button", onclick="toggleSection('not-approved')") Disapprove
+
+    section#not-approved
+      h2 Not Approved Quotes
+      button(type="button", onclick="submitForm('not-approved-form')") Approve
+      form(action="/admin", method="post", id="not-approved-form")
+        input(type="hidden", id="approveIt", name="approveIt", value="true")
+        ul
+          each val in quotesNotApproved
+            li
+              input(type="checkbox" name="options" value=val._id)
+              span= val.quote
+
+    section#approved
+      h2 Approved Quotes
+      button(type="button", onclick="submitForm('approved-form')") Unapprove
+      form(action="/admin", method="post", id="approved-form")
+        input(type="hidden", name="approveIt", value="false")
+        ul
+          each val in quotesApproved
+            li
+              input(type="checkbox" name="options" value=val._id)
+              span= val.quote
+
     
-    h2 Quotes
-    div 
-        each val in quotes
-            div
-                input(type="checkbox" data-id=val._id) 
-                span= val.quote
-    h2 Approved Quotes
-    div 
-        each val in quotesApproved
-            div
-                input(type="checkbox" data-id=val._id) 
-                span= val.quote
-    h2 Not Approved Quotes
-    div 
-        each val in quotesNotApproved
-            div
-                input(type="checkbox" data-id=val._id) 
-                span= val.quote
-
-
         
+    
+    script.
+      const approvedSection = document.getElementById('approved')
+      const notApprovedSection = document.getElementById('not-approved')
+      approvedSection.style.display = 'none'
+      notApprovedSection.style.display = 'block'
+      function toggleSection(section) {
+        const checkboxes = document.querySelectorAll('input[name="options"]:checked')
+        checkboxes.forEach(checkbox => checkbox.checked = false)
+        if (section === 'approved') {
+          approvedSection.style.display = 'block'
+          notApprovedSection.style.display = 'none'
+        } else {
+          approvedSection.style.display = 'none'
+          notApprovedSection.style.display = 'block'
+        }
+      }
+    
+      function submitForm(formId) {
+        event.preventDefault();
+        const form = document.getElementById(formId);
+        
+        
+        form.submit();
+
+        // uncheck checkbox on submit
+         const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+          checkboxes.forEach((checkbox) => {
+          checkbox.checked = false;  // Uncheck each checkbox
+           });
+      }
+       // Get all checked checkboxes
+        const checkedValues = [...document.querySelectorAll('input[name="options"]:checked')].map(checkbox => checkbox.value);
+
+        // Log the values to the console
+        console.log('Checked values:', checkedValues);
