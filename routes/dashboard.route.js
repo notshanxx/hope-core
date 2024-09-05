@@ -1,6 +1,6 @@
 import express from "express";
 import { createQuote } from "../controllers/api.controller.js";
-import { authenticate } from "../middleware/authenticateUser.js";
+import { authenticate, isAdmin } from "../middleware/authenticateUser.js";
 import { getUserInfo } from "../middleware/getUserInfo.js";
 import quoteModel from "../models/quote.model.js";
 const router = express.Router()
@@ -13,14 +13,14 @@ router.get('/dashboard' , authenticate, getUserInfo, (req, res) =>{
 ,
 router.post('/dashboard', authenticate, getUserInfo, createQuote)
 
-router.get("/admin", async(req, res) => {
+router.get("/admin", isAdmin, async(req, res) => {
     const allQuotes = await quoteModel.find()
     const quotesApproved = allQuotes.filter((quote) => quote.info.approved);
     const quotesNotApproved = allQuotes.filter((quote) => !quote.info.approved);
     res.render("admin-dashboard",{quotes:allQuotes, quotesApproved, quotesNotApproved});
   });
-  
-router.post('/admin', async(req, res) => {
+
+router.post('/admin', isAdmin , async(req, res) => {
   // Handle the case where no checkboxes were selected
   const selectedItems = req.body.options;
   const approveIt = req.body.approveIt

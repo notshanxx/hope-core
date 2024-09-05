@@ -23,10 +23,14 @@ const UserSchema = new mongoose.Schema({
       minlength: 6,
       required: false,
     },
+    admin: {
+      type: Boolean,
+      default: false,
+    },
   });
   
   UserSchema.methods.generateToken = function () {
-    const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: this._id, admin: this.admin }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_LIFETIME,
     });
     console.log(token)
