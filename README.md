@@ -6,6 +6,8 @@ A simple system using Node.js, Express, and MongoDB. This system uses JSON Web T
 
 This allows users to login using their Google Account. When a user logs in, they are given a JSON Web Token which is used to authenticate when adding quotes in the database.
 
+## done
+- added admin dashboard for making the quotes approved
 
 ## Todo
 - Make user change their name
